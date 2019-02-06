@@ -1855,17 +1855,19 @@ class ScreenRenderImpl implements ScreenRender {
     }
 
     String getVueColumns(MNode setupNode) {
+        return groovy.json.JsonOutput.toJson(getVueTableSetup(setupNode).columns).replace("\"", "'")
+    }
+
+    Map<String, Object> getVueTableSetup(MNode setupNode) {
         Map<String, ArrayList<MNode>> nodesByName = setupNode.getChildrenByName()
         ArrayList<MNode> columnsNode =  nodesByName.get("columns")
-        Boolean hasColumnsDefinition = false
 
         /*columns setup*/
-        List<Map<String, String>> customSetup = new ArrayList<>()
-
+        def result = new HashMap<>()
+        List<Map<String, String>> columnsSetup = new ArrayList<>()
+        List<Map<String, String>> sortingSetup = new ArrayList<>()
 
         if (columnsNode.size() == 1) {
-            hasColumnsDefinition = true
-
             for (MNode cols in columnsNode) {
                 for (colDef in cols.getChildren()) {
                     Map<String, String> customCol = new HashMap<>()
@@ -1886,25 +1888,50 @@ class ScreenRenderImpl implements ScreenRender {
                     if (colTitleClass != null) customCol.put("titleClass", colTitleClass)
                     if (colWidth != null) customCol.put("width", colWidth)
 
-                    customSetup.add(customCol)
+                    /*prepare output*/
+                    columnsSetup.add(customCol)
+                }
+            }
+
+            result.put("columns", columnsSetup)
+        } else {
+            /*default column setup*/
+            List<Map<String, String>> defaultColumnsSetup = new ArrayList<>()
+            Map<String, String> defaultCols = new HashMap<>()
+
+            defaultCols.put('name', 'toPartyId')
+            defaultCols.put('title', 'Party ID')
+
+            /*prepare output and add to result*/
+            defaultColumnsSetup.add(defaultCols)
+            result.put("columns", defaultColumnsSetup)
+        }
+
+        if (nodesByName.containsKey("sorting")) {
+            ArrayList<MNode> sortingNode =  nodesByName.get("sorting")
+
+            //sorting in separate node
+            if (sortingNode.size() == 1) {
+                for (MNode sort in sortingNode) {
+                    def sortFieldSetup = [:]
+
+                    for (sortDef in sort.getChildren()){
+                        String fieldName = sortDef.attribute("field")
+                        String sortDirection = sortDef.attribute("direction")?:'asc'
+
+                        sortFieldSetup.put("field", fieldName)
+                        sortFieldSetup.put("direction", sortDirection)
+                    }
+
+                    //add to setup
+                    sortingSetup.add(sortFieldSetup)
                 }
             }
         }
 
-        if (hasColumnsDefinition) {
-            return groovy.json.JsonOutput.toJson(customSetup).replace("\"", "'")
-        }
+        /*add sorting setup to result*/
+        result.put("sorting", sortingSetup)
 
-        /*default column setup*/
-        List<Map<String, String>> defaultSetup = new ArrayList<>()
-        Map<String, String> defaultCols = new HashMap<>()
-
-        defaultCols.put('name', 'toPartyId')
-        defaultCols.put('title', 'Party ID')
-
-        /*add to output*/
-        defaultSetup.add(defaultCols)
-
-        return groovy.json.JsonOutput.toJson(defaultSetup).replace("\"", "'")
+        return result
     }
 }
