@@ -780,7 +780,7 @@ class EntityFacadeImpl implements EntityFacade {
             //modify entity name
             entityNode.attributes.put("entity-name", specialEntityName)
 
-            logger.info("Loading special entity ${specialEntityName}.")
+            // logger.info("Loading special entity ${specialEntityName}.")
         }
 
         // create the new EntityDefinition
