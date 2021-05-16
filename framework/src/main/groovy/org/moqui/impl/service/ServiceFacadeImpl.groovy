@@ -232,7 +232,7 @@ class ServiceFacadeImpl implements ServiceFacade {
 
         // search for the service def XML file in the components
         for (String location in this.ecfi.getComponentBaseLocations().values()) {
-            // logger.warn("Finding service node for location=[${location}], servicePathLocation=[${servicePathLocation}]")
+            logger.warn("Finding service node for location=[${location}], servicePathLocation=[${servicePathLocation}]")
             serviceComponentRr = this.ecfi.resourceFacade.getLocationReference(location + "/" + servicePathLocation)
             if (serviceComponentRr.supportsExists()) {
                 if (serviceComponentRr.exists) {
