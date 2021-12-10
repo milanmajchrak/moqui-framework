@@ -47,6 +47,11 @@ archivesBaseName = 'moqui-util'
 
 dependencies {
     compileOnly 'com.google.code.findbugs:annotations:3.0.1'
+
+    compile group: 'com.sun.activation', name: 'javax.activation', version: '1.2.0'
+    compile group: 'javax.activation', name: 'javax.activation-api', version: '1.2.0'
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+
     // JCache, Servlet APIs
     compile 'javax.cache:cache-api:1.0.0'
     compile 'javax.servlet:javax.servlet-api:3.1.0'

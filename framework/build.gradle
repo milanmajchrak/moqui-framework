@@ -71,11 +71,10 @@ dependencies {
     compileOnly 'org.fusesource.jansi:jansi:1.17'
     // Findbugs need only during compile (used by freemarker and various moqui classes)
     compileOnly 'com.google.code.findbugs:annotations:3.0.1'
-
-    // ========== Local (flatDir) libraries in framework/lib ==========
+// ========== Local (flatDir) libraries in framework/lib ==========
 
     // Bitronix Transaction Manager (the default internal tx mgr; custom build from source as 3.0.0 not yet released)
-    compile 'org.codehaus.btm:btm:3.0.0-SNAPSHOT' // Apache 2.0
+    compile 'org.codehaus.btm:btm:2.1.4' // Apache 2.0
     // Bitronix depends on javassist (as does OrientDB, etc; note included here for easier reference, not in framework/lib)
     compile 'org.javassist:javassist:3.22.0-GA' // Apache 2.0
 
@@ -85,6 +84,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.5.5'
 
     // ========== Libraries from jcenter ==========
+
 
     // Apache Commons
     compile 'org.apache.commons:commons-csv:1.5' // Apache 2.0
@@ -107,7 +107,7 @@ dependencies {
     compile 'com.vladsch.flexmark:flexmark-ext-toc:0.30.0'
 
     // Freemarker
-    compile 'org.freemarker:freemarker:2.3.27-incubating' // Apache 2.0
+    compile 'org.freemarker:freemarker:2.3.30' // Apache 2.0
 
     // Java Specifications
     compile 'javax.transaction:jta:1.1'
@@ -130,7 +130,7 @@ dependencies {
     compile 'org.eclipse.jetty:jetty-proxy:9.4.8.v20171121' // Apache 2.0
 
     // javax.mail
-    compile 'com.sun.mail:javax.mail:1.6.0' // CDDL
+    compile 'com.sun.mail:javax.mail:1.6.2' // CDDL
 
     // JSoup (HTML parser, cleaner)
     compile 'org.jsoup:jsoup:1.11.2' // MIT
