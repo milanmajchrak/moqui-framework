@@ -540,15 +540,15 @@ along with this software (see the LICENSE.md file). If not, see
         <seed-data>
             <!-- The MOQUI_LOCAL EmailServer is used by SubEthaSmtpToolFactory for the local SMTP server to setup the server, and
                 for use by send#EmailTemplate if this emailServerId is used to send email -->
-            <moqui.basic.email.EmailServer emailServerId="MOQUI_LOCAL"
+            <!--<moqui.basic.email.EmailServer emailServerId="MOQUI_LOCAL"
                     smtpHost="localhost" smtpPort="2525" smtpStartTls="N" smtpSsl="N"
                     storeHost="" storePort="" storeProtocol="" storeFolder=""
                     storeDelete="N" storeMarkSeen="Y" storeSkipSeen="Y"
-                    mailUsername="email.root" mailPassword="EMAIL_CHANGEME"/>
+                    mailUsername="email.root" mailPassword="EMAIL_CHANGEME"/>-->
 
             <!-- NOTE: these are skeleton settings and some fields need to be filled in (probably best with another data file)
                 for your specific installation in order to be functional -->
-            <moqui.basic.email.EmailServer emailServerId="SYSTEM"/>
+            <!--<moqui.basic.email.EmailServer emailServerId="SYSTEM"/>-->
             <!-- Example values, not actually loaded because would overwrite updated values on seed reload:
                 smtpHost="smtp.gmail.com" smtpPort="587" smtpStartTls="Y" smtpSsl="N"
                 storeHost="imap.gmail.com" storePort="993" storeProtocol="imaps" storeFolder=""

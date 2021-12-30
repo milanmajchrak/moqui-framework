@@ -36,7 +36,7 @@ dependencyUpdates.resolutionStrategy = { componentSelection { rules -> rules.all
     if (rejected) selection.reject('Release candidate')
 } } }
 
-// NOTE: packages should match group, name, version found at https://bintray.com/bintray/jcenter
+// NOTE: packages should match  group, name, version found at https://bintray.com/bintray/jcenter
 repositories {
     jcenter() // http://jcenter.bintray.com
 }
@@ -50,6 +50,11 @@ dependencies {
     // JCache, Servlet APIs
     compile 'javax.cache:cache-api:1.0.0'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'javax.activation:javax.activation-api:1.2.0'
+    // JDK 8    2.2.8
+    // JDK 11   2.3.0
+    compile 'javax.xml.bind:jaxb-api:2.2.8'
+    compile 'javax.xml:jaxb-impl:2.1'
     // SLF4J
     compile 'org.slf4j:slf4j-api:1.7.25'
     // Freemarker
